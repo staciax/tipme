@@ -4,7 +4,8 @@
 from __future__ import annotations
 
 import asyncio
-from typing import TYPE_CHECKING, Any, ClassVar, Coroutine, Dict, Optional, TypeVar, Union
+import logging
+from typing import TYPE_CHECKING, Any, ClassVar, Coroutine, Dict, Optional, TypeVar
 
 import aiohttp
 
@@ -15,6 +16,8 @@ if TYPE_CHECKING:
     Response = Coroutine[Any, Any, T]
 
 # inspired by https://github.com/Rapptz/discord.py/blob/master/http.py
+
+_log = logging.getLogger(__name__)
 
 
 class Route:
@@ -36,8 +39,9 @@ class HTTPClient:
     def __init__(self) -> None:
         self.__session: Optional[aiohttp.ClientSession] = None
 
-    async def cookies_login(self, cookies: Dict[str, str]) -> None:
+    async def cookies_login(self, cookies: Dict[str, str]) -> str:
         self.__session = aiohttp.ClientSession(cookies=cookies)
+        return await self.get_user()
 
     async def close(self) -> None:
         if self.__session:
@@ -48,7 +52,7 @@ class HTTPClient:
             raise RuntimeError('You must login first. use TipMeClient.login()')
 
         response: Optional[aiohttp.ClientResponse] = None
-        data: Optional[Union[Dict[str, Any], str]] = None
+        data: Optional[str] = None
 
         for tries in range(5):
             try:

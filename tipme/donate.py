@@ -1,10 +1,9 @@
-from __future__ import annotations
-
-from typing import TYPE_CHECKING, Optional, TypedDict
-
 # tipme Copyright (c) 2023 STACiA (staciax)
 # Licensed under the MIT license. Refer to the LICENSE file in the project root for more information.
 
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, Optional, TypedDict
 
 if TYPE_CHECKING:
     from typing_extensions import NotRequired
@@ -36,7 +35,16 @@ class Donate:
         self.message: Optional[str] = data.get('message')
 
     def __repr__(self) -> str:
-        return f'<Donate author={self.author!r} amount={self.amount!r} channel={self.channel!r} reference_number={self.reference_number!r} datetime={self.datetime!r} message={self.message!r}>'
+        attrs = [
+            ('author', self.author),
+            ('amount', self.amount),
+            ('channel', self.channel),
+            ('reference_number', self.reference_number),
+            ('datetime', self.datetime),
+            ('message', self.message),
+        ]
+        joined = ' '.join('%s=%r' % t for t in attrs)
+        return f'<{self.__class__.__name__} {joined}>'
 
     def __float__(self) -> float:
         return self.amount

@@ -8,7 +8,6 @@ import pytest
 # Licensed under the MIT license. Refer to the LICENSE file in the project root for more information.
 
 
-
 if TYPE_CHECKING:
     from tipme import TipMeClient
 
