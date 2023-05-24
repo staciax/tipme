@@ -45,8 +45,8 @@ class TipMeClient:
     async def fetch_latest_donates(self) -> List[Donate]:
         donates: List[Donate] = []
         data = await self.http.get_latest_donates()
-        soup = BeautifulSoup(data, "html.parser")
-        donate_list = soup.find_all("tr", {"data-token": True})
+        soup = BeautifulSoup(data, 'html.parser')
+        donate_list = soup.find_all('tr', {'data-token': True})
         for donate in donate_list:
             reference = str(donate).split('data-token="')[1].split('">')[0]
             data = donate.get_text().replace('\t', '').replace('Alert ซ้ำ', '').split('\n')

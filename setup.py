@@ -25,7 +25,7 @@ setup(
     author='STACiA',
     url='https://github.com/staciax/tipme',
     project_urls={
-        "Issue tracker": "https://github.com/staciax/tipme/issues",
+        'Issue tracker': 'https://github.com/staciax/tipme/issues',
     },
     version=version,
     packages=packages,
