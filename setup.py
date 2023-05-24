@@ -30,7 +30,7 @@ setup(
     version=version,
     packages=packages,
     license='MIT',
-    description='A Unofficial python wrapper for TipMe API',
+    description='A Unofficial python wrapper for TipMe.',
     # long_description=readme,
     include_package_data=True,
     install_requires=requirements,
